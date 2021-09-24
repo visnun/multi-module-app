@@ -1,0 +1,31 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:table='urn:import:com.google.gwt.user.cellview.client'>
+
+    <g:HTMLPanel>
+        <div class="container">
+            <g:Label text="Название"/>
+            <g:TextBox ui:field="bookTitle"/>
+
+            <g:Label text="Автор"/>
+            <g:TextBox ui:field="author"/>
+
+            <g:Label text="Количество страниц"/>
+            <g:TextBox ui:field="pages"/>
+
+            <g:Label text="Язык"/>
+            <g:TextBox ui:field="language"/>
+
+            <div class="button-container">
+                <g:Button ui:field="cancelButton"/>
+
+                <g:Button ui:field="saveButton"/>
+            </div>
+        </div>
+
+
+    </g:HTMLPanel>
+
+
+</ui:UiBinder>
+
