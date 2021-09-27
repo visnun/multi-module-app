@@ -6,10 +6,10 @@ import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
-import ru.nunaev.book.client.ui.BookForm;
-import ru.nunaev.book.client.ui.BookTable;
+import ru.nunaev.book.client.ui.bookform.AbstractBookForm;
+import ru.nunaev.book.client.ui.booktable.AbstractBookTable;
+import ru.nunaev.main.client.factory.WidgetFactory;
 import ru.nunaev.model.client.Book;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,11 @@ public class Main implements EntryPoint {
 
     private final ReadingListServiceAsync readingListService = GWT.create(ReadingListService.class);
 
-    BookTable bookTable = new BookTable();
+    private final WidgetFactory widgetFactory = GWT.create(WidgetFactory.class);
 
-    BookForm bookForm = new BookForm();
+    AbstractBookTable bookTable = widgetFactory.getBookTable();
+
+    AbstractBookForm bookForm = widgetFactory.getBookForm();
 
     List <Book> readingList = new ArrayList<>();
 

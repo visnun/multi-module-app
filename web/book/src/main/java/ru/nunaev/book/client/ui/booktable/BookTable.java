@@ -1,4 +1,4 @@
-package ru.nunaev.book.client.ui;
+package ru.nunaev.book.client.ui.booktable;
 
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.cell.client.FieldUpdater;
@@ -16,7 +16,7 @@ import ru.nunaev.model.client.Book;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BookTable extends Composite {
+public class BookTable extends Composite implements AbstractBookTable {
     @UiField
     CellTable<Book> table;
 
@@ -28,11 +28,13 @@ public class BookTable extends Composite {
 
     private Set<Integer> checkedBooks = new HashSet<Integer>();
 
+
     public BookTable() {
         initWidget(tableUiBinder.createAndBindUi(this));
         initTable();
         initButtons();
     }
+
 
     public void initTable() {
         Column<Book, Boolean> checkColumn = new Column<Book, Boolean>(new CheckboxCell(true, false)) {
@@ -95,19 +97,22 @@ public class BookTable extends Composite {
         }
     }
 
+    @Override
     public CellTable<Book> getTable() {
         return table;
     }
 
+    @Override
     public Button getCreateButton() {
         return createButton;
     }
 
-
+    @Override
     public Set<Integer> getSelectedBooks() {
         return checkedBooks;
     }
 
+    @Override
     public Button getDeleteButton() {
         return deleteButton;
     }
