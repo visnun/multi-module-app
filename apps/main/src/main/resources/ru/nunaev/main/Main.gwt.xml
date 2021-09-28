@@ -10,4 +10,5 @@
   <extend-property name="locale" values="en"/>
   <source path='client' />
   <source path="server"/>
+  <source path="event"/>
 </module>

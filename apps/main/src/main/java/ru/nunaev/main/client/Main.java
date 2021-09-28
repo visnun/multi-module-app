@@ -3,12 +3,16 @@ package ru.nunaev.main.client;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import ru.nunaev.book.client.ui.bookform.AbstractBookForm;
 import ru.nunaev.book.client.ui.booktable.AbstractBookTable;
 import ru.nunaev.main.client.factory.WidgetFactory;
+import ru.nunaev.main.event.*;
 import ru.nunaev.model.client.Book;
 
 import java.util.ArrayList;
@@ -28,11 +32,15 @@ public class Main implements EntryPoint {
 
     Book bookForEdit = new Book();
 
+    private final EventBus eventBus = new SimpleEventBus();
+
     @Override
     public void onModuleLoad() {
-        showTable();
-        updateTable();
+        addEventHandlers();
         addHandlers();
+        eventBus.fireEvent(new ShowTableEvent());
+        updateTable();
+
     }
 
     private void showTable() {
@@ -115,30 +123,45 @@ public class Main implements EntryPoint {
         });
     }
 
-    public void addHandlers() {
-        bookTable.getCreateButton().addClickHandler(event -> {
+    public void addEventHandlers() {
+        eventBus.addHandler(ShowBookFormEvent.TYPE, event -> {
             clearFormView();
             showAddForm();
         });
 
-        bookForm.getSaveButton().addClickHandler(event -> {
+        eventBus.addHandler(ShowTableEvent.TYPE, event -> showTable());
+
+        eventBus.addHandler(SaveBookEvent.TYPE, event -> {
             sendAndSaveBook(bookForEdit);
             showTable();
             updateTable();
         });
 
-        bookForm.getCancelButton().addClickHandler(event -> showTable());
-
-        bookTable.getTable().addDomHandler(event -> {
-            int index = ((CellTable) event.getSource()).getKeyboardSelectedRow();
-            bookForEdit = readingList.get(index);
-            showEditForm(bookForEdit);
-        }, DoubleClickEvent.getType());
-
-        bookTable.getDeleteButton().addClickHandler(event -> {
+        eventBus.addHandler(DeleteBookEvent.TYPE, event -> {
             deleteBooks();
             showTable();
             updateTable();
         });
+
+        eventBus.addHandler(DoubleClickEditBookEvent.TYPE, event -> {
+            int index = ((CellTable) event.getSource()).getKeyboardSelectedRow();
+            bookForEdit = readingList.get(index);
+            showEditForm(bookForEdit);
+        });
+    }
+
+
+    public void addHandlers() {
+        bookTable.getCreateButton().addClickHandler(event -> {
+            eventBus.fireEvent(new ShowBookFormEvent());
+        });
+
+        bookForm.getSaveButton().addClickHandler(event -> eventBus.fireEvent(new SaveBookEvent()));
+
+        bookForm.getCancelButton().addClickHandler(event -> eventBus.fireEvent(new ShowTableEvent()));
+
+        bookTable.getTable().addDomHandler(event -> eventBus.fireEvent(new DoubleClickEditBookEvent()), DoubleClickEvent.getType()); // TODO разобраться как передать параметр
+
+        bookTable.getDeleteButton().addClickHandler(event -> eventBus.fireEvent(new DeleteBookEvent()));
     }
 }
