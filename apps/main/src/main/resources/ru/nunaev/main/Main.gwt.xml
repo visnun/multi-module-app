@@ -7,6 +7,7 @@
   <inherits name="ru.nunaev.model.Model"/>
 
   <entry-point class='ru.nunaev.main.client.Main' />
+  <extend-property name="locale" values="en"/>
   <source path='client' />
   <source path="server"/>
 </module>

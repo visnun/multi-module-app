@@ -7,6 +7,8 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.inject.Inject;
+import ru.nunaev.book.client.lang.Lang;
 
 public class BookForm extends Composite implements AbstractBookForm {
     @UiField
@@ -27,10 +29,11 @@ public class BookForm extends Composite implements AbstractBookForm {
     @UiField
     Button saveButton;
 
-    public BookForm() {
+    @Inject
+    public BookForm(Lang lang) {
         initWidget(formViewUiBinder.createAndBindUi(this));
-        cancelButton.setText("Отмена");
-        saveButton.setText("Сохранить");
+        cancelButton.setText(lang.cancel());
+        saveButton.setText(lang.save());
     }
 
     @Override

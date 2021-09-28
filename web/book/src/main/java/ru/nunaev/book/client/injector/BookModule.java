@@ -1,4 +1,4 @@
-package ru.nunaev.book.client.ui.injector;
+package ru.nunaev.book.client.injector;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;

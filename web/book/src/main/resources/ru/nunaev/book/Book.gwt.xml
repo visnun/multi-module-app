@@ -3,4 +3,6 @@
     <inherits name="ru.nunaev.model.Model"/>
     <inherits name="com.google.gwt.inject.Inject"/>
     <inherits name="ru.nunaev.common.Common" />
+    <extend-property name="locale" values="ru" />
+    <extend-property name="locale" values="en" />
 </module>

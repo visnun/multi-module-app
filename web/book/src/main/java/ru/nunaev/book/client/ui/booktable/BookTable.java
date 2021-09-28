@@ -11,6 +11,8 @@ import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
+import com.google.inject.Inject;
+import ru.nunaev.book.client.lang.Lang;
 import ru.nunaev.model.client.Book;
 
 import java.util.HashSet;
@@ -28,15 +30,15 @@ public class BookTable extends Composite implements AbstractBookTable {
 
     private Set<Integer> checkedBooks = new HashSet<Integer>();
 
-
-    public BookTable() {
+    @Inject
+    public BookTable(Lang lang) {
         initWidget(tableUiBinder.createAndBindUi(this));
-        initTable();
-        initButtons();
+        initTable(lang);
+        initButtons(lang);
     }
 
 
-    public void initTable() {
+    public void initTable(Lang lang) {
         Column<Book, Boolean> checkColumn = new Column<Book, Boolean>(new CheckboxCell(true, false)) {
             @Override
             public Boolean getValue(Book object) {
@@ -57,7 +59,7 @@ public class BookTable extends Composite implements AbstractBookTable {
                 return book.getTitle();
             }
         };
-        table.addColumn(titleColumn, "Название");
+        table.addColumn(titleColumn, lang.bookTitle());
 
         TextColumn<Book> authorColumn = new TextColumn<Book>() {
             @Override
@@ -65,7 +67,7 @@ public class BookTable extends Composite implements AbstractBookTable {
                 return book.getAuthor();
             }
         };
-        table.addColumn(authorColumn, "Автор");
+        table.addColumn(authorColumn, lang.author());
 
         TextColumn<Book> pagesColumn = new TextColumn<Book>() {
             @Override
@@ -73,7 +75,7 @@ public class BookTable extends Composite implements AbstractBookTable {
                 return book.getPages();
             }
         };
-        table.addColumn(pagesColumn, "Кол-во страниц");
+        table.addColumn(pagesColumn, lang.pages());
 
         TextColumn<Book> languageColumn = new TextColumn<Book>() {
             @Override
@@ -81,12 +83,12 @@ public class BookTable extends Composite implements AbstractBookTable {
                 return book.getLanguage();
             }
         };
-        table.addColumn(languageColumn, "Язык");
+        table.addColumn(languageColumn, lang.language());
     }
 
-    public void initButtons() {
-        createButton.setText("Добавить");
-        deleteButton.setText("Удалить");
+    public void initButtons(Lang lang) {
+        createButton.setText(lang.add());
+        deleteButton.setText(lang.deleteBtn());
     }
 
     private void changeSelection(Book selectedBook, Boolean checked) {

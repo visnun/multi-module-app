@@ -1,19 +1,20 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
-             xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:table='urn:import:com.google.gwt.user.cellview.client'>
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+
+    <ui:with field="lang" type="ru.nunaev.book.client.lang.Lang"/>
 
     <g:HTMLPanel>
         <div class="container">
-            <g:Label text="Название"/>
+            <g:Label text="{lang.bookTitle}"/>
             <g:TextBox ui:field="bookTitle"/>
 
-            <g:Label text="Автор"/>
+            <g:Label text="{lang.author}"/>
             <g:TextBox ui:field="author"/>
 
-            <g:Label text="Количество страниц"/>
+            <g:Label text="{lang.pages}"/>
             <g:TextBox ui:field="pages"/>
 
-            <g:Label text="Язык"/>
+            <g:Label text="{lang.language}"/>
             <g:TextBox ui:field="language"/>
 
             <div class="button-container">
@@ -22,10 +23,6 @@
                 <g:Button ui:field="saveButton"/>
             </div>
         </div>
-
-
     </g:HTMLPanel>
-
-
 </ui:UiBinder>
 
