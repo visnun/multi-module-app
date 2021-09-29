@@ -8,7 +8,7 @@
             <table:CellTable ui:field="table"/>
 
             <div class="button-container">
-                <g:Button ui:field="createButton"/>
+                <g:Button ui:field="addButton"/>
 
                 <g:Button ui:field="deleteButton"/>
             </div>

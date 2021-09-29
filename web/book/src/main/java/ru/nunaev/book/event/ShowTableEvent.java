@@ -1,6 +1,7 @@
-package ru.nunaev.main.event;
+package ru.nunaev.book.event;
 
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.user.client.ui.RootPanel;
 
 public class ShowTableEvent extends GwtEvent<ShowTableEventHandler> {
     public static Type<ShowTableEventHandler> TYPE = new Type<>();
@@ -12,6 +13,6 @@ public class ShowTableEvent extends GwtEvent<ShowTableEventHandler> {
 
     @Override
     protected void dispatch(ShowTableEventHandler handler) {
-        handler.showTable(this);
+        handler.onShowTable(this);
     }
 }

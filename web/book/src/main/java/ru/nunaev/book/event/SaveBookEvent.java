@@ -1,4 +1,4 @@
-package ru.nunaev.main.event;
+package ru.nunaev.book.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 
@@ -12,6 +12,6 @@ public class SaveBookEvent extends GwtEvent<SaveBookEventHandler> {
 
     @Override
     protected void dispatch(SaveBookEventHandler handler) {
-        handler.saveBook(this);
+        handler.onSaveBook(this);
     }
 }

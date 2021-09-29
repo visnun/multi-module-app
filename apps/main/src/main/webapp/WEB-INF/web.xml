@@ -6,7 +6,7 @@
 <web-app>
     <servlet>
         <servlet-name>readingListService</servlet-name>
-        <servlet-class>ru.nunaev.main.server.ReadingListServiceImpl</servlet-class>
+        <servlet-class>ru.nunaev.book.server.ReadingListServiceImpl</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -14,9 +14,7 @@
         <url-pattern>/Main/list</url-pattern>
     </servlet-mapping>
 
-
     <welcome-file-list>
         <welcome-file>Main.html</welcome-file>
     </welcome-file-list>
-
 </web-app>

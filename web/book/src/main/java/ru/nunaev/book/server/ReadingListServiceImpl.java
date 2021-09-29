@@ -1,8 +1,8 @@
-package ru.nunaev.main.server;
+package ru.nunaev.book.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
-import ru.nunaev.main.client.ReadingListService;
-import ru.nunaev.main.server.utils.DefaultDataGenerator;
+import ru.nunaev.book.server.util.DefaultDataGenerator;
+import ru.nunaev.common.client.ReadingListService;
 import ru.nunaev.model.client.Book;
 
 import java.util.List;

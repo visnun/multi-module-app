@@ -1,4 +1,4 @@
-package ru.nunaev.main.event;
+package ru.nunaev.book.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 
@@ -12,6 +12,6 @@ public class DoubleClickEditBookEvent extends GwtEvent<DoubleClickEditBookEventH
 
     @Override
     protected void dispatch(DoubleClickEditBookEventHandler handler) {
-        handler.showBookForm(this);
+        handler.onDoubleClickEdit(this);
     }
 }

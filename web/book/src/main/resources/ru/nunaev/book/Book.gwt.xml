@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-    <inherits name="ru.nunaev.model.Model"/>
     <inherits name="com.google.gwt.inject.Inject"/>
     <inherits name="ru.nunaev.common.Common" />
     <extend-property name="locale" values="ru" />
     <extend-property name="locale" values="en" />
+    <source path="client"/>
+    <source path="server"/>
+    <source path="event"/>
 </module>

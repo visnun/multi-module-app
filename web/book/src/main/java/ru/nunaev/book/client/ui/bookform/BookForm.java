@@ -1,14 +1,16 @@
 package ru.nunaev.book.client.ui.bookform;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.HTMLPanel;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
 import ru.nunaev.book.client.lang.Lang;
+import ru.nunaev.book.event.SaveBookEvent;
+import ru.nunaev.book.event.ShowBookFormEvent;
+import ru.nunaev.book.event.ShowTableEvent;
+import ru.nunaev.common.client.ReadingListServiceAsync;
 
 public class BookForm extends Composite implements AbstractBookForm {
     @UiField
@@ -30,10 +32,18 @@ public class BookForm extends Composite implements AbstractBookForm {
     Button saveButton;
 
     @Inject
-    public BookForm(Lang lang) {
+    EventBus eventBus;
+
+    @Inject
+    ReadingListServiceAsync readingListService;
+
+    @Inject
+    public void init(Lang lang) {
         initWidget(formViewUiBinder.createAndBindUi(this));
         cancelButton.setText(lang.cancel());
         saveButton.setText(lang.save());
+        addEventHandlers();
+        addClickHandlers();
     }
 
     @Override
@@ -64,6 +74,21 @@ public class BookForm extends Composite implements AbstractBookForm {
     @Override
     public TextBox getLanguage() {
         return language;
+    }
+
+    public void showBookForm() {
+        RootPanel.get().clear();
+        RootPanel.get().add(this);
+    }
+
+    public void addEventHandlers() {
+        eventBus.addHandler(ShowBookFormEvent.TYPE, event -> showBookForm());
+    }
+
+    public void addClickHandlers() {
+        cancelButton.addClickHandler(event -> eventBus.fireEvent(new ShowTableEvent()));
+
+        saveButton.addClickHandler(event -> eventBus.fireEvent(new SaveBookEvent()));
     }
 
     interface FormViewUiBinder extends UiBinder<HTMLPanel, BookForm> {}

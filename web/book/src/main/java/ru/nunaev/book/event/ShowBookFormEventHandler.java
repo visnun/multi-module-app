@@ -1,7 +1,7 @@
-package ru.nunaev.main.event;
+package ru.nunaev.book.event;
 
 import com.google.gwt.event.shared.EventHandler;
 
 public interface ShowBookFormEventHandler extends EventHandler {
-    public void showBookForm(ShowBookFormEvent event);
+    public void onShowBookForm(ShowBookFormEvent event);
 }

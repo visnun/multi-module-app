@@ -11,7 +11,7 @@ public interface AbstractBookTable extends IsWidget {
 
     CellTable<Book> getTable();
 
-    Button getCreateButton();
+    Button getAddButton();
 
     Set<Integer> getSelectedBooks();
 

@@ -1,4 +1,4 @@
-package ru.nunaev.main.event;
+package ru.nunaev.book.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 
@@ -12,6 +12,6 @@ public class DeleteBookEvent extends GwtEvent<DeleteBookEventHandler> {
 
     @Override
     protected void dispatch(DeleteBookEventHandler handler) {
-        handler.deleteBook(this);
+        handler.onDeleteBook(this);
     }
 }

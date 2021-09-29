@@ -1,4 +1,4 @@
-package ru.nunaev.main.event;
+package ru.nunaev.book.event;
 
 import com.google.gwt.event.shared.GwtEvent;
 
@@ -12,6 +12,6 @@ public class ShowBookFormEvent extends GwtEvent<ShowBookFormEventHandler> {
 
     @Override
     protected void dispatch(ShowBookFormEventHandler handler) {
-        handler.showBookForm(this);
+        handler.onShowBookForm(this);
     }
 }

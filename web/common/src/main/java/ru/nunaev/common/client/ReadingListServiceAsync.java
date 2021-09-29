@@ -1,4 +1,4 @@
-package ru.nunaev.main.client;
+package ru.nunaev.common.client;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import ru.nunaev.model.client.Book;
