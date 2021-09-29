@@ -28,5 +28,4 @@ public class DefaultDataGenerator {
 
         return readingList;
     }
-
 }
