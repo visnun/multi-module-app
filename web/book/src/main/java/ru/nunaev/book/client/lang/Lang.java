@@ -19,4 +19,6 @@ public interface Lang extends Messages {
     String cancel();
 
     String save();
+
+    String edit();
 }
