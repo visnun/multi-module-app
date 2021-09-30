@@ -1,9 +1,11 @@
 package ru.nunaev.book.client.ui.bookform;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
@@ -48,7 +50,6 @@ public class BookForm extends Composite implements AbstractBookForm {
         cancelButton.setText(lang.cancel());
         saveButton.setText(lang.save());
         addEventHandlers();
-        addClickHandlers();
     }
 
     @Override
@@ -133,14 +134,17 @@ public class BookForm extends Composite implements AbstractBookForm {
         eventBus.addHandler(ShowEditBookFormEvent.TYPE, event -> showEditBookForm(event.getBook()));
     }
 
-    public void addClickHandlers() {
-        cancelButton.addClickHandler(event -> eventBus.fireEvent(new ShowTableEvent()));
-
-        saveButton.addClickHandler(event -> {
-            eventBus.fireEvent(new SaveBookEvent());
-            eventBus.fireEvent(new ShowTableEvent());
-        });
+    @UiHandler("cancelButton")
+    void handleCancelButtonClick(ClickEvent event) {
+        eventBus.fireEvent(new ShowTableEvent());
     }
+
+    @UiHandler("saveButton")
+    void handleSaveButtonClick(ClickEvent event) {
+        eventBus.fireEvent(new SaveBookEvent());
+        eventBus.fireEvent(new ShowTableEvent());
+    }
+
 
     interface FormViewUiBinder extends UiBinder<HTMLPanel, BookForm> {}
     private static final FormViewUiBinder formViewUiBinder = GWT.create(FormViewUiBinder.class);

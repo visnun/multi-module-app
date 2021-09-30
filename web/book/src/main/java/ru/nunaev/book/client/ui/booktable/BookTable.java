@@ -3,9 +3,11 @@ package ru.nunaev.book.client.ui.booktable;
 import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
@@ -193,14 +195,18 @@ public class BookTable extends Composite implements AbstractBookTable {
     }
 
     public void addButtonHandlers() {
-        addButton.addClickHandler(event -> eventBus.fireEvent(new ShowBookFormEvent()));
-
-        deleteButton.addClickHandler(event -> {
-            eventBus.fireEvent(new DeleteBookEvent());
-            eventBus.fireEvent(new ShowTableEvent());
-        });
-
         editButtonColumn.setFieldUpdater((index, book, value) -> eventBus.fireEvent(new ShowEditBookFormEvent(book)));
+    }
+
+    @UiHandler("addButton")
+    void handleAddButtonClick(ClickEvent event) {
+        eventBus.fireEvent(new ShowBookFormEvent());
+    }
+
+    @UiHandler("deleteButton")
+    void handleDeleteButtonClick(ClickEvent event) {
+        eventBus.fireEvent(new DeleteBookEvent());
+        eventBus.fireEvent(new ShowTableEvent());
     }
 
     interface TableViewUiBinder extends UiBinder<HTMLPanel, BookTable> {}
