@@ -42,20 +42,9 @@ public class BookTableView extends Composite implements AbstractBookTableView {
     }
 
     @Override
-    public Button getAddButton() {
-        return addButton;
-    }
-
-    @Override
     public Set<Integer> getSelectedBooks() {
         return checkedBooks;
     }
-
-    @Override
-    public Button getDeleteButton() {
-        return deleteButton;
-    }
-
 
     private void initTable(Lang lang) {
         Column<Book, Boolean> checkColumn = new Column<Book, Boolean>(new CheckboxCell(true, false)) {

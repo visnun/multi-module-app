@@ -28,16 +28,6 @@ public class BookFormView extends Composite implements AbstractBookFormView {
     }
 
     @Override
-    public Button getCancelButton() {
-        return cancelButton;
-    }
-
-    @Override
-    public Button getSaveButton() {
-        return saveButton;
-    }
-
-    @Override
     public TextBox getBookTitle() {
         return bookTitle;
     }
@@ -56,7 +46,6 @@ public class BookFormView extends Composite implements AbstractBookFormView {
     public TextBox getLanguage() {
         return language;
     }
-
 
     @UiHandler("cancelButton")
     void handleCancelButtonClick(ClickEvent event) {

@@ -69,13 +69,11 @@ public abstract class BookTableActivity implements AbstractBookTableActivity, Ac
         });
     }
 
-
     private void addEventHandlers() {
         eventBus.addHandler(ShowTableEvent.TYPE, event -> showTable());
 
         eventBus.addHandler(DeleteBookEvent.TYPE, event -> deleteBooks());
     }
-
 
     @Inject
     AbstractBookTableView view;
