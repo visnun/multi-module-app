@@ -1,5 +1,6 @@
 package ru.nunaev.book.client.lang;
 
+import com.google.gwt.i18n.client.Constants;
 import com.google.gwt.i18n.client.Messages;
 
 public interface Lang extends Messages {

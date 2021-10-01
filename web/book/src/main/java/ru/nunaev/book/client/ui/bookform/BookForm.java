@@ -6,6 +6,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.*;
 import com.google.inject.Inject;
@@ -18,34 +19,8 @@ import ru.nunaev.common.client.ReadingListServiceAsync;
 import ru.nunaev.model.client.Book;
 
 public class BookForm extends Composite implements AbstractBookForm {
-    @UiField
-    TextBox bookTitle;
-
-    @UiField
-    TextBox author;
-
-    @UiField
-    TextBox pages;
-
-    @UiField
-    TextBox language;
-
-    @UiField
-    Button cancelButton;
-
-    @UiField
-    Button saveButton;
-
     @Inject
-    EventBus eventBus;
-
-    @Inject
-    ReadingListServiceAsync readingListService;
-
-    private Book book;
-
-    @Inject
-    public void init(Lang lang) {
+    public void init() {
         initWidget(formViewUiBinder.createAndBindUi(this));
         cancelButton.setText(lang.cancel());
         saveButton.setText(lang.save());
@@ -82,7 +57,7 @@ public class BookForm extends Composite implements AbstractBookForm {
         return language;
     }
 
-    public void showAddBookForm() {
+    private void showAddBookForm() {
         book = new Book();
         book.setId(0);
 
@@ -95,7 +70,7 @@ public class BookForm extends Composite implements AbstractBookForm {
         RootPanel.get().add(this);
     }
 
-    public void showEditBookForm(Book book) {
+    private void showEditBookForm(Book book) {
         author.setText(book.getAuthor());
         bookTitle.setText(book.getTitle());
         pages.setText(book.getPages());
@@ -106,7 +81,7 @@ public class BookForm extends Composite implements AbstractBookForm {
         RootPanel.get().add(this);
     }
 
-    public void saveBook(Book book) {
+    private void saveBook(Book book) {
         book.setTitle(bookTitle.getText());
         book.setAuthor(author.getText());
         book.setLanguage(language.getText());
@@ -116,20 +91,18 @@ public class BookForm extends Composite implements AbstractBookForm {
 
             @Override
             public void onFailure(Throwable caught) {
-
+                Window.alert("Ошибка сохранения");
             }
 
             @Override
             public void onSuccess(Void result) {
-
+                eventBus.fireEvent(new ShowTableEvent());
             }
         });
     }
 
-    public void addEventHandlers() {
+    private void addEventHandlers() {
         eventBus.addHandler(ShowBookFormEvent.TYPE, event -> showAddBookForm());
-
-        eventBus.addHandler(SaveBookEvent.TYPE, event -> saveBook(book));
 
         eventBus.addHandler(ShowEditBookFormEvent.TYPE, event -> showEditBookForm(event.getBook()));
     }
@@ -141,10 +114,38 @@ public class BookForm extends Composite implements AbstractBookForm {
 
     @UiHandler("saveButton")
     void handleSaveButtonClick(ClickEvent event) {
-        eventBus.fireEvent(new SaveBookEvent());
-        eventBus.fireEvent(new ShowTableEvent());
+        saveBook(book);
     }
 
+    @UiField
+    TextBox bookTitle;
+
+    @UiField
+    TextBox author;
+
+    @UiField
+    TextBox pages;
+
+    @UiField
+    TextBox language;
+
+    @UiField
+    Button cancelButton;
+
+    @UiField
+    Button saveButton;
+
+    @Inject
+    EventBus eventBus;
+
+    @Inject
+    ReadingListServiceAsync readingListService;
+
+    @UiField
+    @Inject
+    Lang lang;
+
+    private Book book;
 
     interface FormViewUiBinder extends UiBinder<HTMLPanel, BookForm> {}
     private static final FormViewUiBinder formViewUiBinder = GWT.create(FormViewUiBinder.class);

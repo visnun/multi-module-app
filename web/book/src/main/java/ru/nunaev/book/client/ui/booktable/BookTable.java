@@ -32,38 +32,12 @@ import java.util.List;
 import java.util.Set;
 
 public class BookTable extends Composite implements AbstractBookTable {
-    @UiField
-    CellTable<Book> table;
-
-    @UiField
-    Button addButton;
-
-    @UiField
-    Button deleteButton;
-
     @Inject
-    ReadingListServiceAsync readingListService;
-
-    @Inject
-    EventBus eventBus;
-
-    private Column<Book, String> editButtonColumn;
-
-    List<Book> readingList = new ArrayList<>();
-
-    private final Set<Integer> checkedBooks = new HashSet<>();
-
-    private Lang lang;
-
-    @Inject
-    public void init(Lang lang) {
+    public void init() {
         initWidget(tableUiBinder.createAndBindUi(this));
-
-        this.lang = lang;
-
         initTable(lang);
         initButtons(lang);
-        addButtonHandlers();
+        addButtonsHandlers();
         addEventHandlers();
     }
 
@@ -87,7 +61,7 @@ public class BookTable extends Composite implements AbstractBookTable {
         return deleteButton;
     }
 
-    public void initTable(Lang lang) {
+    private void initTable(Lang lang) {
         Column<Book, Boolean> checkColumn = new Column<Book, Boolean>(new CheckboxCell(true, false)) {
             @Override
             public Boolean getValue(Book object) {
@@ -139,7 +113,7 @@ public class BookTable extends Composite implements AbstractBookTable {
         table.addColumn(editButtonColumn, "");
     }
 
-    public void initButtons(Lang lang) {
+    private void initButtons(Lang lang) {
         addButton.setText(lang.add());
         deleteButton.setText(lang.deleteBtn());
     }
@@ -152,7 +126,7 @@ public class BookTable extends Composite implements AbstractBookTable {
         }
     }
 
-    public void showTable() {
+    private void showTable() {
         readingList.clear();
 
         readingListService.getReadingList(new AsyncCallback<List<Book>>() {
@@ -174,7 +148,7 @@ public class BookTable extends Composite implements AbstractBookTable {
         RootPanel.get().add(this);
     }
 
-    public void deleteBooks() {
+    private void deleteBooks() {
         readingListService.delete(checkedBooks, new AsyncCallback<Void>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -183,18 +157,16 @@ public class BookTable extends Composite implements AbstractBookTable {
 
             @Override
             public void onSuccess(Void result) {
-
+                eventBus.fireEvent(new ShowTableEvent());
             }
         });
     }
 
-    public void addEventHandlers() {
+    private void addEventHandlers() {
         eventBus.addHandler(ShowTableEvent.TYPE, event -> showTable());
-
-        eventBus.addHandler(DeleteBookEvent.TYPE, event -> deleteBooks());
     }
 
-    public void addButtonHandlers() {
+    private void addButtonsHandlers() {
         editButtonColumn.setFieldUpdater((index, book, value) -> eventBus.fireEvent(new ShowEditBookFormEvent(book)));
     }
 
@@ -205,9 +177,33 @@ public class BookTable extends Composite implements AbstractBookTable {
 
     @UiHandler("deleteButton")
     void handleDeleteButtonClick(ClickEvent event) {
-        eventBus.fireEvent(new DeleteBookEvent());
-        eventBus.fireEvent(new ShowTableEvent());
+        deleteBooks();
     }
+
+    @UiField
+    CellTable<Book> table;
+
+    @UiField
+    Button addButton;
+
+    @UiField
+    Button deleteButton;
+
+    @Inject
+    ReadingListServiceAsync readingListService;
+
+    @Inject
+    EventBus eventBus;
+
+    @Inject
+    Lang lang;
+
+    private Column<Book, String> editButtonColumn;
+
+    private final List<Book> readingList = new ArrayList<>();
+
+    private final Set<Integer> checkedBooks = new HashSet<>();
+
 
     interface TableViewUiBinder extends UiBinder<HTMLPanel, BookTable> {}
     private static final TableViewUiBinder tableUiBinder = GWT.create(TableViewUiBinder.class);

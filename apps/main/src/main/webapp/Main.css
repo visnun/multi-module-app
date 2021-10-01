@@ -5,8 +5,7 @@
 .container {
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    /*align-items: center;*/
+    align-items: center;
 }
 
 .gwt-Button {
@@ -17,4 +16,10 @@
     display: flex;
     flex-direction: row;
     margin: 10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

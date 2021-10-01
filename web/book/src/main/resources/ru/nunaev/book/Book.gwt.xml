@@ -4,6 +4,8 @@
     <inherits name="ru.nunaev.common.Common" />
     <extend-property name="locale" values="ru" />
     <extend-property name="locale" values="en" />
+    <set-property-fallback name="locale" value="ru"/>
+    <set-property name="locale" value="en,ru"/>
     <source path="client"/>
     <source path="server"/>
     <source path="event"/>
