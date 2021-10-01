@@ -1,11 +1,10 @@
-package ru.nunaev.book.client.ui.bookform;
+package ru.nunaev.book.client.activity.bookform;
 
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.Widget;
 
-public interface AbstractBookForm extends IsWidget {
+public interface AbstractBookFormView extends IsWidget {
 
     Button getCancelButton();
 
@@ -18,4 +17,6 @@ public interface AbstractBookForm extends IsWidget {
     TextBox getPages();
 
     TextBox getLanguage();
+
+    void setActivity(AbstractBookFormActivity activity);
 }

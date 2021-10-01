@@ -3,16 +3,28 @@ package ru.nunaev.book.client.injector;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
-import ru.nunaev.book.client.ui.bookform.AbstractBookForm;
-import ru.nunaev.book.client.ui.bookform.BookForm;
-import ru.nunaev.book.client.ui.booktable.AbstractBookTable;
-import ru.nunaev.book.client.ui.booktable.BookTable;
+import com.google.inject.Singleton;
+import ru.nunaev.book.client.activity.bookform.AbstractBookFormView;
+import ru.nunaev.book.client.activity.bookform.BookFormActivity;
+import ru.nunaev.book.client.activity.booktable.BookTableActivity;
+import ru.nunaev.book.client.view.bookform.BookFormView;
+import ru.nunaev.book.client.activity.booktable.AbstractBookTableView;
+import ru.nunaev.book.client.view.booktable.BookTableView;
+import ru.nunaev.book.server.ReadingListServiceImpl;
+import ru.nunaev.common.client.ReadingListService;
+import ru.nunaev.common.client.ReadingListServiceAsync;
 
 public class BookModule extends AbstractGinModule {
     @Override
     protected void configure() {
-        bind(AbstractBookForm.class).to(BookForm.class).asEagerSingleton();
-        bind(AbstractBookTable.class).to(BookTable.class).asEagerSingleton();
+        bind(AbstractBookFormView.class).to(BookFormView.class).in(Singleton.class);
+        bind(BookFormActivity.class).asEagerSingleton();
+
+        bind(AbstractBookTableView.class).to(BookTableView.class).in(Singleton.class);
+        bind(BookTableActivity.class).asEagerSingleton();
+
         bind(EventBus.class).to(SimpleEventBus.class).asEagerSingleton();
+
+        bind(ReadingListService.class).to(ReadingListServiceImpl.class).in(Singleton.class);
     }
 }

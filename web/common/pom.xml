@@ -25,6 +25,12 @@
             <version>1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>ru.brainworm</groupId>
+            <artifactId>factory.generator.injector</artifactId>
+            <version>${project.factory.version}</version>
+        </dependency>
+
     </dependencies>
 
 

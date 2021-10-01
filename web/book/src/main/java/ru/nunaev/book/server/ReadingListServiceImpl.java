@@ -48,6 +48,7 @@ public class ReadingListServiceImpl extends RemoteServiceServlet implements
         });
     }
 
+    @Override
     public Book bookById(int id) {
         Book book = null;
         for (Book item : readingList) {

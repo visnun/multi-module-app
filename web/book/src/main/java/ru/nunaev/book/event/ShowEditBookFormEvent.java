@@ -6,14 +6,14 @@ import ru.nunaev.model.client.Book;
 public class ShowEditBookFormEvent extends GwtEvent<ShowEditBookFormEventHandler> {
     public static Type<ShowEditBookFormEventHandler> TYPE = new Type<>();
     
-    private final Book book;
+    private int id;
 
-    public ShowEditBookFormEvent(Book book) {
-        this.book = book;
+    public ShowEditBookFormEvent(int id) {
+        this.id = id;
     }
 
-    public Book getBook() {
-        return book;
+    public int getBookId() {
+        return id;
     }
 
     @Override

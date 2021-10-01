@@ -13,6 +13,9 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <project.factory.version>2.3-SNAPSHOT</project.factory.version>
+
     </properties>
 
     <dependencies>
@@ -30,6 +33,20 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>protei-repo</id>
+            <name>central</name>
+            <url>https://repo.protei.ru/repository/central</url>
+        </repository>
+
+        <repository>
+            <id>spring-releases</id>
+            <name>spring-releases</name>
+            <url>https://repo.spring.io/libs-release</url>
+        </repository>
+    </repositories>
 
     <modules>
         <module>apps/main</module>
