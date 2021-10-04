@@ -13,5 +13,5 @@ public interface ReadingListServiceAsync {
 
     void delete(Set<Integer> selectedBooks, AsyncCallback<Void> async);
 
-    void bookById(int id, AsyncCallback<Book> async);
+    void bookById(Integer id, AsyncCallback<Book> async);
 }

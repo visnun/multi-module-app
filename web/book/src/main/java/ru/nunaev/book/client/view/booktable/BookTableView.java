@@ -4,7 +4,6 @@ import com.google.gwt.cell.client.ButtonCell;
 import com.google.gwt.cell.client.CheckboxCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -19,6 +18,7 @@ import ru.nunaev.book.client.activity.booktable.AbstractBookTableActivity;
 import ru.nunaev.book.client.activity.booktable.AbstractBookTableView;
 import ru.nunaev.book.client.lang.Lang;
 import ru.nunaev.model.client.Book;
+
 import java.util.HashSet;
 import java.util.Set;
 

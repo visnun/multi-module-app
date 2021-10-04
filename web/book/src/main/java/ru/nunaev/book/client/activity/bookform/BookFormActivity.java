@@ -1,34 +1,41 @@
 package ru.nunaev.book.client.activity.bookform;
 
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import ru.brainworm.factory.generator.activity.client.activity.Activity;
-import ru.nunaev.book.event.SaveBookEvent;
-import ru.nunaev.book.event.ShowBookFormEvent;
-import ru.nunaev.book.event.ShowEditBookFormEvent;
-import ru.nunaev.book.event.ShowTableEvent;
+import ru.brainworm.factory.generator.activity.client.annotations.Event;
+import ru.brainworm.factory.generator.activity.client.enums.Type;
 import ru.nunaev.common.client.ReadingListServiceAsync;
+import ru.nunaev.common.client.events.BookEvents;
 import ru.nunaev.model.client.Book;
 
 public abstract class BookFormActivity implements AbstractBookFormActivity, Activity {
     @Inject
     public void init() {
         view.setActivity(this);
-        addEventHandlers();
+    }
+
+    @Event
+    public void onEdit(BookEvents.Edit event) {
+        showEditBookForm(event.id);
+    }
+
+    @Event
+    public void onAdd(BookEvents.Create event) {
+        showAddBookForm();
     }
 
     @Override
     public void onCancelClick() {
-        eventBus.fireEvent(new ShowTableEvent());
+        fireEvent(new BookEvents.Show());
     }
 
     @Override
     public void onSaveClick() {
-        eventBus.fireEvent(new SaveBookEvent());
+        saveBook(book);
     }
 
     private void showAddBookForm() {
@@ -44,7 +51,7 @@ public abstract class BookFormActivity implements AbstractBookFormActivity, Acti
         RootPanel.get().add(view);
     }
 
-    private void showEditBookForm(int id) {
+    private void showEditBookForm(Integer id) {
         readingListService.bookById(id, new AsyncCallback<Book>() {
             @Override
             public void onFailure(Throwable caught) {
@@ -84,17 +91,9 @@ public abstract class BookFormActivity implements AbstractBookFormActivity, Acti
 
             @Override
             public void onSuccess(Void result) {
-                eventBus.fireEvent(new ShowTableEvent());
+                fireEvent(new BookEvents.Show());
             }
         });
-    }
-
-    private void addEventHandlers() {
-        eventBus.addHandler(ShowBookFormEvent.TYPE, event -> showAddBookForm());
-
-        eventBus.addHandler(ShowEditBookFormEvent.TYPE, event -> showEditBookForm(event.getBookId()));
-
-        eventBus.addHandler(SaveBookEvent.TYPE, event -> saveBook(book));
     }
 
     @Inject
@@ -102,9 +101,6 @@ public abstract class BookFormActivity implements AbstractBookFormActivity, Acti
 
     @Inject
     ReadingListServiceAsync readingListService;
-
-    @Inject
-    EventBus eventBus;
 
     private Book book;
 }

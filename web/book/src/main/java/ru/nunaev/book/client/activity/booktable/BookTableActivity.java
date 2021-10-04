@@ -1,15 +1,13 @@
 package ru.nunaev.book.client.activity.booktable;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import ru.brainworm.factory.generator.activity.client.activity.Activity;
-import ru.nunaev.book.event.DeleteBookEvent;
-import ru.nunaev.book.event.ShowBookFormEvent;
-import ru.nunaev.book.event.ShowEditBookFormEvent;
-import ru.nunaev.book.event.ShowTableEvent;
+import ru.brainworm.factory.generator.activity.client.annotations.Event;
+import ru.brainworm.factory.generator.activity.client.enums.Type;
+import ru.nunaev.common.client.events.BookEvents;
 import ru.nunaev.common.client.ReadingListServiceAsync;
 import ru.nunaev.model.client.Book;
 
@@ -19,22 +17,26 @@ public abstract class BookTableActivity implements AbstractBookTableActivity, Ac
     @Inject
     public void init() {
         view.setActivity(this);
-        addEventHandlers();
+    }
+
+    @Event(Type.FILL_CONTENT)
+    public void onShow(BookEvents.Show event) {
+        showTable();
     }
 
     @Override
-    public void onEditClick(int id) {
-        eventBus.fireEvent(new ShowEditBookFormEvent(id));
+    public void onEditClick(Integer id) {
+        fireEvent(new BookEvents.Edit(id));
     }
 
     @Override
     public void onAddClick() {
-        eventBus.fireEvent(new ShowBookFormEvent());
+        fireEvent(new BookEvents.Create());
     }
 
     @Override
     public void onDeleteClick() {
-        eventBus.fireEvent(new DeleteBookEvent());
+        deleteBooks();
     }
 
     private void showTable() {
@@ -64,15 +66,9 @@ public abstract class BookTableActivity implements AbstractBookTableActivity, Ac
 
             @Override
             public void onSuccess(Void result) {
-                eventBus.fireEvent(new ShowTableEvent());
+                showTable();
             }
         });
-    }
-
-    private void addEventHandlers() {
-        eventBus.addHandler(ShowTableEvent.TYPE, event -> showTable());
-
-        eventBus.addHandler(DeleteBookEvent.TYPE, event -> deleteBooks());
     }
 
     @Inject
@@ -80,7 +76,4 @@ public abstract class BookTableActivity implements AbstractBookTableActivity, Ac
 
     @Inject
     ReadingListServiceAsync readingListService;
-
-    @Inject
-    EventBus eventBus;
 }

@@ -3,7 +3,7 @@ package ru.nunaev.model.client;
 import java.io.Serializable;
 
 public class Book implements Serializable {
-    private int id;
+    private Integer id;
     private String title;
     private String author;
     private String pages;
@@ -51,11 +51,11 @@ public class Book implements Serializable {
         this.language = language;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

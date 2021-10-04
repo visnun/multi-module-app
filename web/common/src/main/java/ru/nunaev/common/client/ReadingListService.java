@@ -16,5 +16,5 @@ public interface ReadingListService extends RemoteService {
 
     void delete(Set<Integer> selectedBooks);
 
-    Book bookById(int id);
+    Book bookById(Integer id);
 }

@@ -49,7 +49,7 @@ public class ReadingListServiceImpl extends RemoteServiceServlet implements
     }
 
     @Override
-    public Book bookById(int id) {
+    public Book bookById(Integer id) {
         Book book = null;
         for (Book item : readingList) {
             if (item.getId() == id) {
