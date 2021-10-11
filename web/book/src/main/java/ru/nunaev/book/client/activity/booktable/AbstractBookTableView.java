@@ -13,5 +13,4 @@ public interface AbstractBookTableView extends IsWidget {
     Set<Integer> getSelectedBooks();
 
     void setActivity(AbstractBookTableActivity activity);
-
 }

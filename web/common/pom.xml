@@ -32,10 +32,6 @@
         </dependency>
 
     </dependencies>
-
-
-
-
     <build>
         <resources>
             <resource>
@@ -45,5 +41,27 @@
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.nanoko.coffee-mill</groupId>
+                <artifactId>coffee-mill-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <stylesheetsDir>src/main/sass</stylesheetsDir>
+                    <workDir>${project.build.outputDirectory}/ru/nunaev/common/public/css</workDir>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>compile-sass</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>compile-sass</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>

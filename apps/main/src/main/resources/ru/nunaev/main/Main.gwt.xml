@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='Main'>
   <inherits name='com.google.gwt.user.User' />
-  <inherits name='com.google.gwt.user.theme.standard.Standard' />
+<!--  <inherits name='com.google.gwt.user.theme.standard.Standard' />-->
   <inherits name="ru.nunaev.book.Book" />
   <entry-point class='ru.nunaev.main.client.Main' />
   <extend-property name="locale" values="en"/>

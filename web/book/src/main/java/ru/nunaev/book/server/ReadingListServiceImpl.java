@@ -12,7 +12,7 @@ import java.util.Set;
 public class ReadingListServiceImpl extends RemoteServiceServlet implements
         ReadingListService {
 
-    private List<Book> readingList = DefaultDataGenerator.getReadingList();
+    private final List<Book> readingList = DefaultDataGenerator.getReadingList();
 
     private int lastBookId = 2;
 
@@ -41,7 +41,7 @@ public class ReadingListServiceImpl extends RemoteServiceServlet implements
     public void delete(Set<Integer> books) {
         books.forEach(index -> {
             for (int i = 0; i < readingList.size(); i++) {
-                if (readingList.get(i).getId() == index) {
+                if (readingList.get(i).getId().equals(index)) {
                     readingList.remove(i);
                 }
             }
@@ -52,7 +52,7 @@ public class ReadingListServiceImpl extends RemoteServiceServlet implements
     public Book bookById(Integer id) {
         Book book = null;
         for (Book item : readingList) {
-            if (item.getId() == id) {
+            if (item.getId().equals(id)) {
                 book = item;
             }
         }

@@ -6,13 +6,12 @@ import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 import ru.nunaev.book.client.activity.bookform.AbstractBookFormView;
 import ru.nunaev.book.client.activity.bookform.BookFormActivity;
+import ru.nunaev.book.client.activity.booktable.AbstractBookTableView;
 import ru.nunaev.book.client.activity.booktable.BookTableActivity;
 import ru.nunaev.book.client.view.bookform.BookFormView;
-import ru.nunaev.book.client.activity.booktable.AbstractBookTableView;
 import ru.nunaev.book.client.view.booktable.BookTableView;
 import ru.nunaev.book.server.ReadingListServiceImpl;
 import ru.nunaev.common.client.ReadingListService;
-import ru.nunaev.common.client.ReadingListServiceAsync;
 
 public class BookModule extends AbstractGinModule {
     @Override
