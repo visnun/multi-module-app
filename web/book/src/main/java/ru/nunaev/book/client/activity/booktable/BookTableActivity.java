@@ -7,8 +7,8 @@ import com.google.inject.Inject;
 import ru.brainworm.factory.generator.activity.client.activity.Activity;
 import ru.brainworm.factory.generator.activity.client.annotations.Event;
 import ru.brainworm.factory.generator.activity.client.enums.Type;
-import ru.nunaev.common.client.events.BookEvents;
 import ru.nunaev.common.client.ReadingListServiceAsync;
+import ru.nunaev.common.client.events.BookEvents;
 import ru.nunaev.model.client.Book;
 
 import java.util.List;

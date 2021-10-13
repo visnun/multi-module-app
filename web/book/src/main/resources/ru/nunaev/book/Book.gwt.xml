@@ -11,5 +11,5 @@
     <source path="client"/>
     <source path="server"/>
     <source path="event"/>
-    <servlet path="/Test" class="ru.nunaev.book.server.TestImpl"/>
+<!--    <servlet path="/Test" class="ru.nunaev.book.server.TestImpl"/>-->
 </module>

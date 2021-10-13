@@ -1,20 +1,30 @@
 package ru.nunaev.book.server;
 
+import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.nunaev.book.server.util.DefaultDataGenerator;
 import ru.nunaev.common.client.ReadingListService;
 import ru.nunaev.model.client.Book;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Set;
 
+@Service("ReadingListService")
 @SuppressWarnings("serial")
-public class ReadingListServiceImpl extends RemoteServiceServlet implements
-        ReadingListService {
+public class ReadingListServiceImpl  extends RemoteServiceServlet  implements ReadingListService {
 
     private final List<Book> readingList = DefaultDataGenerator.getReadingList();
 
-    private int lastBookId = 2;
+    @Autowired
+    private BookServiceImpl bookService;
+
+    @PostConstruct
+    public void onCostruct(){
+        System.out.println("ReadingListServiceImpl constructed");
+    }
 
     @Override
     public List<Book> getReadingList() {
@@ -23,18 +33,9 @@ public class ReadingListServiceImpl extends RemoteServiceServlet implements
 
     @Override
     public void save(Book book) {
-        if (book.getId() == 0) {
-            lastBookId += 1;
-            book.setId(lastBookId);
-            readingList.add(book);
-        } else {
-            Book bookForEdit = bookById(book.getId());
-
-            bookForEdit.setTitle(book.getTitle());
-            bookForEdit.setAuthor(book.getAuthor());
-            bookForEdit.setPages(book.getPages());
-            bookForEdit.setLanguage(book.getLanguage());
-        }
+        Integer id = bookService.save(book);
+        book.setId(id);
+        readingList.add(book);
     }
 
     @Override

@@ -8,7 +8,7 @@ import ru.nunaev.model.client.Book;
 import java.util.List;
 import java.util.Set;
 
-@RemoteServiceRelativePath("list")
+@RemoteServiceRelativePath("springGwtServices/ReadingListService")
 public interface ReadingListService extends RemoteService {
     List<Book> getReadingList();
 

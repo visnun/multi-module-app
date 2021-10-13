@@ -4,17 +4,39 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
     <servlet>
-        <servlet-name>readingListService</servlet-name>
-        <servlet-class>ru.nunaev.book.server.ReadingListServiceImpl</servlet-class>
+        <servlet-name>springGwtRemoteServiceServlet</servlet-name>
+        <servlet-class>ru.nunaev.book.server.servlet.SpringGwtRemoteServiceServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>readingListService</servlet-name>
-        <url-pattern>/Main/list</url-pattern>
+        <servlet-name>springGwtRemoteServiceServlet</servlet-name>
+        <url-pattern>/Main/springGwtServices/*</url-pattern>
     </servlet-mapping>
+
+<!--    <servlet>-->
+<!--        <servlet-name>readingListService</servlet-name>-->
+<!--        <servlet-class>ru.nunaev.book.server.ReadingListServiceImpl</servlet-class>-->
+<!--    </servlet>-->
+
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>readingListService</servlet-name>-->
+<!--        <url-pattern>/Main/list</url-pattern>-->
+<!--    </servlet-mapping>-->
 
     <welcome-file-list>
         <welcome-file>Main.html</welcome-file>
     </welcome-file-list>
 </web-app>
+
