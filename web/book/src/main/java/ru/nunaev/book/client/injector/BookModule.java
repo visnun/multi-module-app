@@ -10,8 +10,8 @@ import ru.nunaev.book.client.activity.booktable.AbstractBookTableView;
 import ru.nunaev.book.client.activity.booktable.BookTableActivity;
 import ru.nunaev.book.client.view.bookform.BookFormView;
 import ru.nunaev.book.client.view.booktable.BookTableView;
-import ru.nunaev.book.server.ReadingListServiceImpl;
-import ru.nunaev.common.client.ReadingListService;
+import ru.nunaev.book.server.controller.ReadingListControllerImpl;
+import ru.nunaev.common.client.ReadingListController;
 
 public class BookModule extends AbstractGinModule {
     @Override
@@ -24,6 +24,6 @@ public class BookModule extends AbstractGinModule {
 
         bind(EventBus.class).to(SimpleEventBus.class).asEagerSingleton();
 
-        bind(ReadingListService.class).to(ReadingListServiceImpl.class).in(Singleton.class);
+        bind(ReadingListController.class).to(ReadingListControllerImpl.class).in(Singleton.class);
     }
 }

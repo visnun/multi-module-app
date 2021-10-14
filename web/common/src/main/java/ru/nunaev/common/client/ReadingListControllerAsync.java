@@ -6,7 +6,7 @@ import ru.nunaev.model.client.Book;
 import java.util.List;
 import java.util.Set;
 
-public interface ReadingListServiceAsync {
+public interface ReadingListControllerAsync {
     void getReadingList(AsyncCallback<List<Book>> async);
 
     void save(Book book, AsyncCallback<Void> async);

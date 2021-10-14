@@ -7,7 +7,7 @@ import com.google.inject.Inject;
 import ru.brainworm.factory.generator.activity.client.activity.Activity;
 import ru.brainworm.factory.generator.activity.client.annotations.Event;
 import ru.brainworm.factory.generator.activity.client.enums.Type;
-import ru.nunaev.common.client.ReadingListServiceAsync;
+import ru.nunaev.common.client.ReadingListControllerAsync;
 import ru.nunaev.common.client.events.BookEvents;
 import ru.nunaev.model.client.Book;
 
@@ -40,10 +40,10 @@ public abstract class BookTableActivity implements AbstractBookTableActivity, Ac
     }
 
     private void showTable() {
-        readingListService.getReadingList(new AsyncCallback<List<Book>>() {
+        readingListController.getReadingList(new AsyncCallback<List<Book>>() {
             @Override
             public void onFailure(Throwable caught) {
-
+                Window.alert("Ошибка");
             }
 
             @Override
@@ -58,7 +58,7 @@ public abstract class BookTableActivity implements AbstractBookTableActivity, Ac
     }
 
     public void deleteBooks() {
-        readingListService.delete(view.getSelectedBooks(), new AsyncCallback<Void>() {
+        readingListController.delete(view.getSelectedBooks(), new AsyncCallback<Void>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Ошибка при удалении");
@@ -75,5 +75,5 @@ public abstract class BookTableActivity implements AbstractBookTableActivity, Ac
     AbstractBookTableView view;
 
     @Inject
-    ReadingListServiceAsync readingListService;
+    ReadingListControllerAsync readingListController;
 }

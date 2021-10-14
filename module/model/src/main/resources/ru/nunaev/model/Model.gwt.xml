@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-
+    <inherits name="com.google.gwt.inject.Inject"/>
+    <inherits name="ru.brainworm.factory.generator.injector.Injector"/>
+    <inherits name="ru.brainworm.factory.generator.activity.Activity"/>
 </module>

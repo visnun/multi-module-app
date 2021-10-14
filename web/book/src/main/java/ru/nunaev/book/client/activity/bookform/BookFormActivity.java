@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import ru.brainworm.factory.generator.activity.client.activity.Activity;
 import ru.brainworm.factory.generator.activity.client.annotations.Event;
-import ru.nunaev.common.client.ReadingListServiceAsync;
+import ru.nunaev.common.client.ReadingListControllerAsync;
 import ru.nunaev.common.client.events.BookEvents;
 import ru.nunaev.model.client.Book;
 
@@ -51,7 +51,7 @@ public abstract class BookFormActivity implements AbstractBookFormActivity, Acti
     }
 
     private void showEditBookForm(Integer id) {
-        readingListService.bookById(id, new AsyncCallback<Book>() {
+        readingListController.bookById(id, new AsyncCallback<Book>() {
             @Override
             public void onFailure(Throwable caught) {
 
@@ -81,7 +81,7 @@ public abstract class BookFormActivity implements AbstractBookFormActivity, Acti
         book.setLanguage(view.getLanguage().getText());
         book.setPages(view.getPages().getText());
 
-        readingListService.save(book, new AsyncCallback<Void>() {
+        readingListController.save(book, new AsyncCallback<Void>() {
 
             @Override
             public void onFailure(Throwable caught) {
@@ -99,7 +99,7 @@ public abstract class BookFormActivity implements AbstractBookFormActivity, Acti
     AbstractBookFormView view;
 
     @Inject
-    ReadingListServiceAsync readingListService;
+    ReadingListControllerAsync readingListController;
 
     private Book book;
 }

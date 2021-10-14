@@ -7,25 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ExampleAspect {
 
-    @Pointcut("execution(* ru.nunaev.book.server.ReadingListServiceImpl.*(..))")
-    public void myServices() {
+    @Pointcut("execution(* ru.nunaev.book.server.controller.ReadingListControllerImpl.*(..))")
+    public void execute() {
 
     }
 
-
-    @Pointcut("within(ru.nunaev.book.server.*)")
-    public void serviceLayer() {
-
-    }
-
-
-    @Around("serviceLayer()")
-    public void example2() {
-        System.out.println("Вызван метод сервиса serviceLayer");
-    }
-
-    @Around("myServices()")
-    public void example() {
-        System.out.println("Вызван метод сервиса");
+    @After("execute()")
+    public void afterExecute() {
+        System.out.println("Вызван метод контроллера");
     }
 }
