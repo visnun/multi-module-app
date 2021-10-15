@@ -51,7 +51,7 @@ public abstract class BookFormActivity implements AbstractBookFormActivity, Acti
     }
 
     private void showEditBookForm(Integer id) {
-        readingListController.bookById(id, new AsyncCallback<Book>() {
+        readingListController.byId(id, new AsyncCallback<Book>() {
             @Override
             public void onFailure(Throwable caught) {
 

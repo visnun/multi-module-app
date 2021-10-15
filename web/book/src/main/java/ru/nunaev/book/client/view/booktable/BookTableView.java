@@ -19,7 +19,9 @@ import ru.nunaev.book.client.activity.booktable.AbstractBookTableView;
 import ru.nunaev.book.client.lang.Lang;
 import ru.nunaev.model.client.Book;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class BookTableView extends Composite implements AbstractBookTableView {
@@ -42,7 +44,7 @@ public class BookTableView extends Composite implements AbstractBookTableView {
     }
 
     @Override
-    public Set<Integer> getSelectedBooks() {
+    public List<Integer> getSelectedBooks() {
         return checkedBooks;
     }
 
@@ -139,7 +141,7 @@ public class BookTableView extends Composite implements AbstractBookTableView {
 
     private Column<Book, String> editButtonColumn;
 
-    private final Set<Integer> checkedBooks = new HashSet<>();
+    private final List<Integer> checkedBooks = new ArrayList<>();
 
     private AbstractBookTableActivity activity;
 

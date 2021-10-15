@@ -40,7 +40,7 @@ public abstract class BookTableActivity implements AbstractBookTableActivity, Ac
     }
 
     private void showTable() {
-        readingListController.getReadingList(new AsyncCallback<List<Book>>() {
+        readingListController.getAll(new AsyncCallback<List<Book>>() {
             @Override
             public void onFailure(Throwable caught) {
                 Window.alert("Ошибка");

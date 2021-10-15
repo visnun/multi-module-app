@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Set;
 
 public interface ReadingListControllerAsync {
-    void getReadingList(AsyncCallback<List<Book>> async);
+    void getAll(AsyncCallback<List<Book>> async);
 
     void save(Book book, AsyncCallback<Void> async);
 
-    void delete(Set<Integer> selectedBooks, AsyncCallback<Void> async);
+    void delete(List<Integer> selectedBooks, AsyncCallback<Void> async);
 
-    void bookById(Integer id, AsyncCallback<Book> async);
+    void byId(Integer id, AsyncCallback<Book> async);
 }

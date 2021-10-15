@@ -11,6 +11,6 @@ public class ReadingListControllerImplTest {
     @DisplayName("Id = 1")
     void bookById_requestBookWithId1_idOfTheReturnedBookIs1() {
         ReadingListControllerImpl service = new ReadingListControllerImpl();
-        Assertions.assertEquals(1, service.bookById(1).getId(), "Id должен быть равен 1");
+        Assertions.assertEquals(1, service.byId(1).getId(), "Id должен быть равен 1");
     }
 }

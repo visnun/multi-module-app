@@ -10,11 +10,11 @@ import java.util.Set;
 
 @RemoteServiceRelativePath("springGwtServices/ReadingListController")
 public interface ReadingListController extends RemoteService {
-    List<Book> getReadingList();
+    List<Book> getAll();
 
     void save(Book book);
 
-    void delete(Set<Integer> selectedBooks);
+    void delete(List<Integer> selectedBooks);
 
-    Book bookById(Integer id);
+    Book byId(Integer id);
 }
