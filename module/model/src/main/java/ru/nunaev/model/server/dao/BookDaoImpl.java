@@ -50,8 +50,6 @@ public class BookDaoImpl implements BookDao {
                     @Override
                     public void setValues(PreparedStatement ps, int i) throws SQLException {
                         ps.setInt(1, bookIdList.get(i));
-                        System.out.println(ps.getMetaData());
-                        System.out.println(bookIdList.get(i));
                     }
 
                     @Override
