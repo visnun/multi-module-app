@@ -25,22 +25,6 @@ public class BookDaoImpl implements BookDao {
         return jdbcTemplate.query(sql, new BookMapper());
     }
 
-
-    /**
-     * Альтернатива
-     *
-     *     final String SQL = "select * from Student where id = ? ";
-     *         List <Student> students = jdbcTemplateObject.query(
-     *                 SQL, new PreparedStatementSetter() {
-     *
-     *                     public void setValues(PreparedStatement preparedStatement) throws SQLException {
-     *                         preparedStatement.setInt(1, id);
-     *                     }
-     *                 },
-     *                 new StudentMapper());
-     *         return students.get(0);
-     */
-
     @Override
     public Book getById(Integer id) {
         final String query = "SELECT * FROM tb_books WHERE ID = ?";
@@ -78,5 +62,4 @@ public class BookDaoImpl implements BookDao {
     }
 
     private JdbcTemplate jdbcTemplate;
-
 }

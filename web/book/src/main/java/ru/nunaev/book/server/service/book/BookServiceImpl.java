@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-public class BookServiceImpl implements BookService {
+public class  BookServiceImpl implements BookService {
 
     @Override
     public Integer save(Book book) {
